@@ -1,0 +1,9 @@
+﻿{
+    "name": "yuidocsite",
+    "version": "0.0.1",
+    "bin": "./site.js",
+    "private": true,
+    "dependencies": {
+        "nconf": "0.6.7"
+    }
+}
