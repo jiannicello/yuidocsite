@@ -41,10 +41,11 @@ http.createServer(function (req, res) {
     
     console.log('---------------------');
     console.log('urlhelper.urlstr: ' + urlhelper.urlstr);
+    console.log('urlhelper.ext: ' + urlhelper.ext);
     
     if (urlhelper.urlstr === '/') {
         writeResponseRedirect(res, '/docs/index.html');
-    } else if (urlhelper.ext === 'html') {
+    } else if (urlhelper.ext === '.html') {
         readFile(urlhelper.fullpath, function (data) {
             writeResponse(res, data.toString());
         });
