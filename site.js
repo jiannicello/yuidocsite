@@ -5,6 +5,7 @@ var fs = require('fs'),
     nconf = require('nconf'),
     UrlHelper = require('./lib/urlhelper').UrlHelper,
     DataSearcher = require('./lib/datasearcher').DataSearcher,
+    embedder = require('./lib/embedder'),
     searcher = null;
 
 
@@ -49,11 +50,13 @@ searcher.load(function () {
 
         if (urlhelper.urlstr === '/') {
             writeResponseRedirect(res, '/docs/index.html');
+        } else if (embedder.isEmbed(urlhelper.urlstr)) {
+            writeResponse(res, embedder.getEmbed(urlhelper.urlstr));
         } else if (urlhelper.searchTerm) {
             writeResponse(res, searcher.search(urlhelper.searchTerm));
         } else if (urlhelper.ext === '.html') {
             readFile(urlhelper.fullpath, function (data) {
-                writeResponse(res, data.toString());
+                writeResponse(res, embedder.getHtmlPage(data.toString()));
             });
         } else {
             readFile(urlhelper.fullpath, function (data) {
