@@ -25,6 +25,17 @@ function writeResponseRedirect(res, path) {
     res.end();
 }
 
+function writeResponseStream(res, fullpath) {
+    var readStream = null;
+    
+    res.writeHead(200, {'Content-Type': mime.lookup(fullpath)});
+    readStream =  fs.createReadStream(fullpath);
+    readStream.on('error', function(err){
+        writeErrorResponse(res, err);
+    });
+    readStream.pipe(res);
+}
+
 nconf.argv();
 console.log('nconf.get port: ' + nconf.get('port'));
 console.log('nconf.get search_desc: ' + nconf.get('search_desc'));
@@ -43,8 +54,7 @@ searcher.load(function () {
                         callback(data);
                     }
                 });
-            },
-            readStream = null;
+            };
 
         console.log('---------------------');
         console.log('urlhelper.urlstr: ' + urlhelper.urlstr);
@@ -61,12 +71,7 @@ searcher.load(function () {
                 writeResponse(res, embedder.getHtmlPage(data.toString()));
             });
         } else {
-            res.writeHead(200, {'Content-Type': mime.lookup(urlhelper.fullpath)});
-            readStream =  fs.createReadStream(urlhelper.fullpath);
-            readStream.on('error', function(err){
-                writeErrorResponse(res, err);
-            });
-            readStream.pipe(res);
+            writeResponseStream(res, urlhelper.fullpath);
         }
 
     }).listen(port);
