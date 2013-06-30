@@ -56,9 +56,9 @@ searcher.load(function () {
                 });
             };
 
-        console.log('---------------------');
-        console.log('urlhelper.urlstr: ' + urlhelper.urlstr);
-        console.log('urlhelper.searchTerm: ' + urlhelper.searchTerm);
+        //console.log('---------------------');
+        //console.log('urlhelper.urlstr: ' + urlhelper.urlstr);
+        //console.log('urlhelper.searchTerm: ' + urlhelper.searchTerm);
 
         if (urlhelper.urlstr === '/') {
             writeResponseRedirect(res, '/docs/index.html');
