@@ -3,6 +3,7 @@
 var fs = require('fs'),
     http = require('http'),
     nconf = require('nconf'),
+    mime = require('mime'),
     UrlHelper = require('./lib/urlhelper').UrlHelper,
     DataSearcher = require('./lib/datasearcher').DataSearcher,
     embedder = require('./lib/embedder'),
@@ -42,7 +43,8 @@ searcher.load(function () {
                         callback(data);
                     }
                 });
-            };
+            },
+            readStream = null;
 
         console.log('---------------------');
         console.log('urlhelper.urlstr: ' + urlhelper.urlstr);
@@ -59,9 +61,12 @@ searcher.load(function () {
                 writeResponse(res, embedder.getHtmlPage(data.toString()));
             });
         } else {
-            readFile(urlhelper.fullpath, function (data) {
-                writeResponse(res, data);
+            res.writeHead(200, {'Content-Type': mime.lookup(urlhelper.fullpath)});
+            readStream =  fs.createReadStream(urlhelper.fullpath);
+            readStream.on('error', function(err){
+                writeErrorResponse(res, err);
             });
+            readStream.pipe(res);
         }
 
     }).listen(port);

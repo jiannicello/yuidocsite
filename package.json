@@ -4,6 +4,7 @@
     "bin": "./site.js",
     "private": true,
     "dependencies": {
+        "mime": "1.2.9",
         "nconf": "0.6.7"
     }
 }
