@@ -56,16 +56,16 @@ searcher.load(function () {
                 });
             };
 
-        //console.log('---------------------');
-        //console.log('urlhelper.urlstr: ' + urlhelper.urlstr);
-        //console.log('urlhelper.searchTerm: ' + urlhelper.searchTerm);
+        console.log('---------------------');
+        console.log('urlhelper.pathname: ' + urlhelper.pathname);
+        console.log('urlhelper.query.q: ' + urlhelper.query.q);
 
-        if (urlhelper.urlstr === '/') {
+        if (urlhelper.pathname === '/') {
             writeResponseRedirect(res, '/docs/index.html');
-        } else if (embedder.isEmbed(urlhelper.urlstr)) {
-            writeResponse(res, embedder.getEmbed(urlhelper.urlstr));
-        } else if (urlhelper.searchTerm) {
-            writeResponse(res, searcher.search(urlhelper.searchTerm));
+        } else if (embedder.isEmbed(urlhelper.pathname)) {
+            writeResponse(res, embedder.getEmbed(urlhelper.pathname));
+        } else if (urlhelper.query.q) {
+            writeResponse(res, searcher.search(urlhelper.query.q));
         } else if (urlhelper.ext === '.html') {
             readFile(urlhelper.fullpath, function (data) {
                 writeResponse(res, embedder.getHtmlPage(data.toString()));
