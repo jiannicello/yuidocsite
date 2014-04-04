@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 var fs = require('fs'),
     http = require('http'),
@@ -75,4 +75,6 @@ searcher.load(function () {
         }
 
     }).listen(port);
+    
+    searcher.watch();
 }); //end searcher.load
