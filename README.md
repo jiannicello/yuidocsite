@@ -1,17 +1,26 @@
 # yuidocsite
 
 
-node.js site that adds Everything search tab to yuidocs
+node.js site that adds Everything search tab to yuidocs. 
+
+
+## Pre-Setup
+
+install yuidocjs
+
+    npm -g i yuidocjs
 
 ## Installation
 
     npm install -g yuidocsite
 
-## Set up steps
+
+## Site setup
 
 1) create empty [sitefolder] directory where docs site will live
 
 2) create a sub folder called **docs** in [sitefolder]
+
 
 3) run **yuidoc** to create outut into **docs** sub folder. 
 
@@ -52,3 +61,13 @@ To search for text in documentation descriptions specify **search_desc** when st
 ````
 	yuidocsite --port 3000 --search_desc
 ````
+
+## Notes
+
+The app watches the yuidoc json file with the documentation metadata. So, while the site is up, 
+everytime you run yuidoc and re-populate the **docs** subfolder, the new documentation changes 
+are searchable without a site restart.
+
+## To Do
+Figure out locking bug. In local tests with npm version, there is some locking of the node process when trying to shutdown site. Only after exiting out of the Terminal 
+window that started the process, does the process close.
