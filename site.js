@@ -27,10 +27,10 @@ function writeResponseRedirect(res, path) {
 
 function writeResponseStream(res, fullpath) {
     var readStream = null;
-    
+
     res.writeHead(200, {'Content-Type': mime.lookup(fullpath)});
     readStream =  fs.createReadStream(fullpath);
-    readStream.on('error', function(err){
+    readStream.on('error', function (err) {
         writeErrorResponse(res, err);
     });
     readStream.pipe(res);
@@ -75,6 +75,6 @@ searcher.load(function () {
         }
 
     }).listen(port);
-    
+
     searcher.watch();
 }); //end searcher.load

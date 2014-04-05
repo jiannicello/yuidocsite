@@ -1,6 +1,6 @@
 {
   "name": "yuidocsite",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "bin": {
     "yuidocsite": "./site.js"
   },
