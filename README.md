@@ -68,6 +68,3 @@ The app watches the yuidoc json file with the documentation metadata. So, while 
 everytime you run yuidoc and re-populate the **docs** subfolder, the new documentation changes 
 are searchable without a site restart.
 
-## To Do
-Figure out locking bug. In local tests with npm version, there is some locking of the node process when trying to shutdown site. Only after exiting out of the Terminal 
-window that started the process, does the process close.
