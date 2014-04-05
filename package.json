@@ -2,9 +2,17 @@
     "name": "yuidocsite",
     "version": "0.0.1",
     "bin": "./site.js",
-    "private": true,
     "dependencies": {
         "mime": "1.2.9",
         "nconf": "0.6.7"
-    }
+    },
+    "author": "John Iannicello",
+    "repository": {
+	"type": "git",
+	"url": "https://github.com/jiannicello/yuidocsite"
+    },
+    "keywords": [
+	"yui",
+	"yuidoc"
+    ]
 }
